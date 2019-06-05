@@ -1,5 +1,8 @@
-import h, { sort, save } from './helpers'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 
-h();
-sort();
-save();
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+export default App;
