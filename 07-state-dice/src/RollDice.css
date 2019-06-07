@@ -1,0 +1,19 @@
+.RollDice button {
+  display: inline-block;
+  width: 15em;
+  padding: 20px 15px;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  background-color: teal;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+  .RollDice button:hover {
+    background-color: darkcyan;
+  }
+
+  .RollDice button:focus {
+    display: none;
+  }
