@@ -1,0 +1,11 @@
+.Colorbox {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  background-color: salmon;
+  border: 1px solid grey;
+}
+
+.Colorbox:active {
+  background-color: aqua;
+}
