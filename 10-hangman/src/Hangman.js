@@ -66,7 +66,7 @@ class Hangman extends Component {
 
   restart() {
     this.setState({
-      nWrong: 0, 
+      nWrong: 0,
       guessed: new Set(),
       answer: randomWord()
     })
@@ -75,14 +75,19 @@ class Hangman extends Component {
   /** render: render game */
   render() {
     let gameOver = this.state.nWrong >= this.props.maxWrong;
+    const isWinner = this.guessedWord().join("") === this.state.answer;
+    let gameState = this.generateButtons();
+    if(isWinner) gameState = "You Win"
+    if(gameOver) gameState = "You Lost"
     return (
       <div className='Hangman'>
         <h1>Hangman</h1>
         <img src={this.props.images[this.state.nWrong]} alt={this.altText()}/>
         <p>Wrong guesses: {this.state.nWrong}</p>
         <p className='Hangman-word'>{!gameOver ? this.guessedWord() : this.state.answer}</p>
-        <p className='Hangman-btns'>{!gameOver ? this.generateButtons() : `You lost` }</p>
-        <button onClick={this.restart}>Restart</button>
+        <p className='Hangman-btns'>{gameState}</p>
+
+        <button id="reset" onClick={this.restart}>Restart</button>
       </div>
     );
   }
