@@ -95,7 +95,7 @@ class Board extends Component {
 
   render() {
     if(this.state.hasWon) {
-      return <h1>YOU WON!</h1>
+      return <h1><span className="winner neon-blue">YOU</span><span className="winner neon-orange"> WIN!</span></h1>
     }
     let tblBoard = [];
     // need to understand nested loops better...
