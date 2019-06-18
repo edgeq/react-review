@@ -6,8 +6,13 @@ class Box extends Component {
       <div style={{
         height: `${this.props.height}em`,
         width: `${this.props.width}em`,
-        backgroundColor: this.props.color}}>
-        <button>X</button>
+        backgroundColor: this.props.color,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end'
+      }}
+        >
+        <button onClick={this.props.removeBox}>Remove</button>
       </div>
     )
   }

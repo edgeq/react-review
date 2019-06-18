@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import uuid from 'uuid/v4'
 
 class NewBoxForm extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class NewBoxForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     // make a new box (use this.props)
-    this.props.createBox(this.state)
+    const newBox = {...this.state, id: uuid()}
+    this.props.createBox(newBox)
     this.setState({
       width: "",
       height: "",
@@ -28,6 +30,8 @@ class NewBoxForm extends Component {
       [evt.target.name]: evt.target.value
     });
   }
+
+
   // this component should render a form that when submitted, creates a new Box. You should be able to specify the Box’s width, height, and background color. When the form is submitted, clear the input values.
   render() {
     return (
