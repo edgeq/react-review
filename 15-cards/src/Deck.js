@@ -1,51 +1,60 @@
 import React, { Component } from 'react';
 import Card from './Card';
 import axios from 'axios';
+const API_BASE_URL = "https://deckofcardsapi.com/api/deck"
 
 class Deck extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      deck_id: '',
-      remaining: '',
-      card: '',
-      imgUrl: '',
-      suit: ''
-    }
+    this.state = {deck: null, drawn:[] };
     this.drawCard = this.drawCard.bind(this);
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     //make the connection and store the deckID
-    axios.get("https://deckofcardsapi.com/api/deck/new/shuffle/").then(res => {
-      this.setState({deck_id: res.data.deck_id, remaining: res.data.remaining})
-    });
+    let deck = await axios.get(`${API_BASE_URL}/new/shuffle/`);
+    this.setState({deck: deck.data});
+
 
   }
 
-  componentDidUpdate(prevProps, prevState){
-    //make use of last card... maybe this goes in card?
-  }
 
   async drawCard(){
-    let deckID = this.state.deck_id
-    let response = await axios.get(`https://deckofcardsapi.com/api/deck/${deckID}/draw/`)
-    let data = response.data;
-    console.log(data);
-    this.setState({imgUrl: data.cards[0].image, card: data.cards[0].value, suit: data.cards[0].suit});
+    let deckID = this.state.deck.deck_id
+    try {
+      let cardRes = await axios.get(`${API_BASE_URL}/${deckID}/draw/`);
+      let card = cardRes.data.cards[0]
+      console.log(cardRes.data);
+      if(!cardRes.data.success) {
+        throw new Error("No more cards in deck");
+      }
+      // take eisting state
+      this.setState(st => ({
+        drawn: [...st.drawn,
+          // add card data to the drawn array
+        {
+          id: card.code,
+          image: card.image,
+          name: `${card.value} of ${card.suit}`
+        }
+      ]
+      }));
+
+    } catch (error) {
+      alert(error);
+    }
   }
 
   render() {
+    const cards = this.state.drawn.map(c => (
+      <Card key={c.id} name={c.name} image={c.image} />
+    ));
     return (
     <div>
       <h1>Deck Goes Here</h1>
       <button onClick={this.drawCard}>Draw Card</button>
-      <Card
-        deckID={this.state.deck_id}
-        imgUrl={this.state.imgUrl}
-        value={this.state.card}
-        suit={this.state.suit}
-        />
+      {cards}
+
     </div>
     )
   }
