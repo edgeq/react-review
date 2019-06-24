@@ -11,7 +11,7 @@ class JokeList extends Component {
   }
   constructor(props){
     super(props);
-    this.state = {jokes: []};
+    this.state = {jokes: JSON.parse(window.localStorage.getItem('jokes') || "[]")};
     this.getJokes = this.getJokes.bind(this);
     this.handleVote = this.handleVote.bind(this);
   }
@@ -23,17 +23,24 @@ class JokeList extends Component {
       let jokes = await axios.get("https://icanhazdadjoke.com/slack");
       let newJoke = jokes.data.attachments[0].text;
       jokeArr.push({text: newJoke, votes: 0, id: uuid()});
+      window.localStorage.setItem(
+        "jokes",
+        JSON.stringify(jokeArr)
+      )
       this.setState({jokes: jokeArr})
       // console.log(this.state.jokes);
+
     }
   }
-  async componentDidMount(){
-    await this.getJokes();
+  componentDidMount(){
+  if(this.state.jokes.length === 0)
+   this.getJokes();
+
   }
 
   handleVote(id, delta) {
     this.setState(st => ({
-      jokes: st.jokes.map(j => 
+      jokes: st.jokes.map(j =>
         j.id === id ? {...j, votes: j.votes + delta} : j)
     }))
   }
@@ -52,14 +59,14 @@ class JokeList extends Component {
 
         <div className="JokeList-jokes">
             {this.state.jokes.map(j => (
-        <Joke 
-          text={j.text} 
-          votes={j.votes} 
-          key={j.id} 
-          id={j.id} 
+        <Joke
+          text={j.text}
+          votes={j.votes}
+          key={j.id}
+          id={j.id}
           upvote={() => this.handleVote(j.id, 1)}
           downvote={() => this.handleVote(j.id, -1)}
-          
+
           />
       ))}
         </div>
