@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       {/* spread a palette to unpack it's contents as props */}
-      <Palette {...seedColors[4]}/>
+      <Palette {...seedColors[6]}/>
     </div>
   );
 }
