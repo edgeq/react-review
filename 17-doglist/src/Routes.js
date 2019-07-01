@@ -5,12 +5,13 @@ import DogDetails from "./DogDetails";
 
 class Routes extends Component {
   render() {
-    // this function will take advantage of route props
+    // this function will take advantage of route props and return a component
     const getDog = props => {
       let name = props.match.params.name;
       let currentDog = this.props.dogs.find(
         dog => dog.name.toLowerCase() === name.toLowerCase()
       );
+      // at a specified route, pass along routeProps {...props} AND the matching currentDog's props together
       return <DogDetails {...props} dog={currentDog} />;
     };
     const doglist = this.props.dogs;
