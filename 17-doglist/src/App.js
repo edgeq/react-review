@@ -1,11 +1,12 @@
-import React, {Component} from "react";
-import {Switch, Route} from 'react-router-dom';
+import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./App.css";
 import DogList from "./DogList";
-import whiskey from './imgs/whiskey.jpg';
-import tubby from './imgs/tubby.jpg';
-import hazel from './imgs/hazel.jpg';
+import whiskey from "./imgs/whiskey.jpg";
+import tubby from "./imgs/tubby.jpg";
+import hazel from "./imgs/hazel.jpg";
+import DogDetails from "./DogDetails";
 
 class App extends Component {
   static defaultProps = {
@@ -17,7 +18,8 @@ class App extends Component {
         facts: [
           "Whiskey loves eating popcorn.",
           "Whiskey is a terrible guard dog.",
-          "Whiskey wants to cuddle with you!"
+          "Whiskey wants to cuddle with you!",
+          "Whiske's parents are alcoholics"
         ]
       },
       {
@@ -27,7 +29,8 @@ class App extends Component {
         facts: [
           "Hazel has soooo much energy!",
           "Hazel is highly intelligent.",
-          "Hazel loves people more than dogs."
+          "Hazel loves people more than dogs.",
+          "Hazel has hazel eyes"
         ]
       },
       {
@@ -43,13 +46,24 @@ class App extends Component {
     ]
   };
   render() {
+    // this function will take advantage of route props
+    const getDog = props => {
+      let name = props.match.params.name;
+      let currentDog = this.props.dogs.find(
+        dog => dog.name.toLowerCase() === name.toLowerCase()
+      );
+      return <DogDetails {...props} dog={currentDog} />;
+    }
     const doglist = this.props.dogs;
     return (
       <div className="App">
-        <Navbar />
-      
-        <Route path="/" render={() => <h1>Dog List Goes Here</h1> } />
-
+      <Navbar dogs={this.props.dogs}/>
+      <Switch>
+        <Route exact path="/" render={() => <h1>Route w/o props</h1>} />
+        <Route exact path="/dogs" render={() => <DogList dogs={doglist} />} />
+        {/* This route will depend on rout props. getDog() will put those props to work */}
+        <Route exact path="/dogs/:name" render={getDog} />
+      </Switch>
       </div>
     );
   }
