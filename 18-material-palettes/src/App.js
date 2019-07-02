@@ -9,7 +9,7 @@ class App extends Component {
     return (
     <div className="App">
       {/* spread a palette to unpack it's contents as props */}
-      <Palette {...seedColors[6]}/>
+      <Palette palette={generatePalette(seedColors[4])}/>
     </div>
   );
 }
