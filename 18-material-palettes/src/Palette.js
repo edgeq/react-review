@@ -5,6 +5,7 @@ import './Palette.css';
 
 class Palette extends Component {
   render() {
+    // this.props is coming from App.js import of seedColors.js
     const colorBoxes = this.props.colors.map(color => (
       <ColorBox background={color.color} name={color.name}/>
     ))
