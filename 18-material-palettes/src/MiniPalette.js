@@ -14,9 +14,9 @@ const styles = {
 };
 
 function MiniPalette(props) {
-  // { classes } is extracted from withStyles.
-  // props will package styles.main inside of { classes }
   // we use props because we're in a functional component and NOT a class.
+  // styles.main will be packaged inside of { classes } on export
+  // { classes } is extracted from withStyles.
   const { classes } = props;
   console.log(classes);
 
