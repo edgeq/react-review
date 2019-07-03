@@ -15,7 +15,7 @@ const styles = {
 
 function MiniPalette(props) {
   // we use props because we're in a functional component and NOT a class.
-  // styles.main will be packaged inside of { classes } on export
+  // ...styles will be packaged inside of { classes } on export
   // { classes } is extracted from withStyles.
   const { classes } = props;
   console.log(classes);
@@ -28,6 +28,7 @@ function MiniPalette(props) {
   )
 }
 
+// Component Inception:
 // this is a higher order component that exports a modified component with styles
-// withStyles passes in the styles object with classes and attaches them to the MiniPalette component
+// withStyles passes in the styles object as {classes} and attaches them to the MiniPalette component
 export default withStyles(styles)(MiniPalette);
