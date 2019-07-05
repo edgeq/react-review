@@ -56,7 +56,8 @@ function MiniPalette(props) {
   ))
 
   return (
-    <div className={classes.root}>
+    // the onClick event uses method props passed from PaletteList
+    <div className={classes.root} onClick={ props.paletteLink }>
       <div className={classes.clrDivs}> { miniColorBoxes } </div> 
       <h5 className={classes.title} aria-label={paletteName}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>

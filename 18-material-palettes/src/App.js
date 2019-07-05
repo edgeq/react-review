@@ -15,7 +15,10 @@ class App extends Component {
     console.log(generatePalette(seedColors[4]));
     return (
       <Switch>
-        <Route exact path="/" render={() => <PaletteList palettes={seedColors}/>} />
+        {/* pass routeProps so we can be aware of history and dynamically update the current url. 
+            in this case we will use routeProps in a component's onClick event 
+        */}
+        <Route exact path="/" render={(routeProps) => <PaletteList palettes={seedColors} {...routeProps}/>} />
         <Route
           exact
           // /:id requires routeProps witch comes with match.params.id
