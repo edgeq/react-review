@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import { Link } from 'react-router-dom';
-import MiniPalette from './MiniPalette';
-import { withStyles } from '@material-ui/styles';
+import MiniPalette from "./MiniPalette";
+import { withStyles } from "@material-ui/styles";
 
 const styles = {
   root: {
@@ -18,7 +18,6 @@ const styles = {
     flexDirection: "column",
     flexWrap: "wrap",
     border: "1px solid white"
-    
   },
   nav: {
     display: "flex",
@@ -33,16 +32,15 @@ const styles = {
     gridTemplateColumns: "repeat(3, 30%)",
     gridGap: "5%"
   }
-}
+};
 
 class PaletteList extends Component {
-  goToPalette(id){
-    // history.push comes from App.js and is used to update the current url. 
+  goToPalette(id) {
+    // history.push comes from App.js and is used to update the current url.
     this.props.history.push(`/palette/${id}`);
   }
   render() {
     const { classes, palettes } = this.props;
-
 
     return (
       <div className={classes.root}>
@@ -55,7 +53,10 @@ class PaletteList extends Component {
               // Each MiniPalette should link to it's corresponding palette
               // <Link to={`palette/${palette.id}`}> - we don't want to do this because of inherited <a> styling.
               // Instead, we want to use the history routeProp to dynamically update (push to) the current URL on each MiniPalette
-                <MiniPalette {...palette} paletteLink={() => this.goToPalette(palette.id)}/>
+              <MiniPalette
+                {...palette}
+                paletteLink={() => this.goToPalette(palette.id)}
+              />
               // </Link>
             ))}
           </div>
