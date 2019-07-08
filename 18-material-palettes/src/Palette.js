@@ -33,7 +33,7 @@ class Palette extends Component {
         // colorId={color.id}
         // paletteId={id}
         moreUrl={`/palette/${id}/${color.id}`}
-        showLink
+        showingFullPalette
       />
     ));
     return (
