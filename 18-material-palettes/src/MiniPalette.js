@@ -1,50 +1,8 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
-
 // styles is an object comprised of classNames
-const styles = {
-  // each className is an object with properties
-  root: {
-    backgroundColor: "white",
-    border: "1px solid black",
-    borderRadius: "5px",
-    padding: "0.5rem",
-    position: "relative",
-    overflow: "hidden",
-    "&:hover" : {
-      cursor: "pointer"
-    }
-  },
-  title: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    margin: "0",
-    color: "black",
-    paddingTop: "0.5rem",
-    fontSize: "1rem",
-    position: "relative"
-  },
-  emoji: {
-    marginLeft: "0.5rem",
-    fontSize: "1.5rem"
-  },
-  miniColor: {
-    height: "25%",
-    width: "20%",
-    display: "inline-block",
-    margin: "0 auto",
-    position: "relative",
-    marginBottom: "-3.5px",
-  },
-  clrDivs: {
-    backgroundColor: "#dae1e4",
-    height: "150px",
-    width: "100%",
-    borderRadius: "5px",
-    overflow: "hidden"  
-  }
-};
+import styles from './styles/MiniPaletteStyles';
+
 
 function MiniPalette(props) {
   // we use props because we're in a functional component and NOT a class.
@@ -58,7 +16,7 @@ function MiniPalette(props) {
   return (
     // the onClick event uses method props passed from PaletteList
     <div className={classes.root} onClick={ props.paletteLink }>
-      <div className={classes.clrDivs}> { miniColorBoxes } </div> 
+      <div className={classes.clrDivs}> { miniColorBoxes } </div>
       <h5 className={classes.title} aria-label={paletteName}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>
       </h5>
