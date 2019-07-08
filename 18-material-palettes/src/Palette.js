@@ -2,7 +2,19 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import ColorBox from "./ColorBox";
 import PaletteFooter from "./PaletteFooter";
+import { withStyles } from '@material-ui/styles';
 import "./Palette.css";
+
+const styles = {
+  Palette: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+  },
+  colors: {
+    height: "90%"
+  }
+}
 
 class Palette extends Component {
   constructor(props) {
@@ -23,6 +35,7 @@ class Palette extends Component {
   render() {
     // this.props is coming from App.js import of seedColors.js
     const { colors, paletteName, emoji, id } = this.props.palette;
+    const { classes } = this.props;
     const { level, format } = this.state;
 
     const colorBoxes = colors[level].map(color => (
@@ -37,7 +50,7 @@ class Palette extends Component {
       />
     ));
     return (
-      <div className="Palette">
+      <div className={classes.Palette}>
         {/* Navbar goes here */}
         <Navbar
           level={level}
@@ -45,7 +58,7 @@ class Palette extends Component {
           handleChange={this.changeFormat}
           showingAllColors
         />
-        <div className="Palette-colors">
+        <div className={classes.colors}>
           {/* bunch of color boxes */}
           {colorBoxes}
         </div>
@@ -56,4 +69,4 @@ class Palette extends Component {
   }
 }
 
-export default Palette;
+export default withStyles(styles)(Palette);
