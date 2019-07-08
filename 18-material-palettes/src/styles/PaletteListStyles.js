@@ -12,13 +12,19 @@ export default {
     alignItems: "flex-start",
     flexDirection: "column",
     flexWrap: "wrap",
-    border: "1px solid white"
+    // border: "1px solid white"
   },
   nav: {
     display: "flex",
     width: "100%",
     justifyContent: "space-between",
-    color: "white"
+    alignItems: "center",
+    color: "white",
+    "& a": {
+      textDecoration: "none",
+      color: "white"
+
+    }
   },
   palettes: {
     boxSizing: "border-box",

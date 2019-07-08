@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Palette from "./Palette";
 import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
+import NewPaletteForm from './NewPaletteForm';
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 
@@ -16,8 +17,8 @@ class App extends Component {
     // console.log(generatePalette(seedColors[4]));
     return (
       <Switch>
-        {/* pass routeProps so we can be aware of history and dynamically update the current url. 
-            in this case we will use routeProps in a component's onClick event 
+        {/* pass routeProps so we can be aware of history and dynamically update the current url.
+            in this case we will use routeProps in a component's onClick event
         */}
         <Route
           exact
@@ -25,6 +26,11 @@ class App extends Component {
           render={routeProps => (
             <PaletteList palettes={seedColors} {...routeProps} />
           )}
+        />
+        <Route
+          exact
+          path="/palette/new"
+          render={() => <NewPaletteForm />}
         />
         <Route
           exact
