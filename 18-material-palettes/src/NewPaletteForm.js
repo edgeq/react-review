@@ -81,7 +81,7 @@ class NewPaletteForm extends Component {
     this.state = {
       open: false,
       currentColor: "teal",
-      colors: [{ color: "teal", name: "tealish" }],
+      colors: [],
       newName: ""
     };
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
@@ -110,11 +110,13 @@ class NewPaletteForm extends Component {
   handleChange = evt => {
     this.setState({ newName: evt.target.value });
   };
+
   updateCurrentColor(newColor) {
     //will update color
     console.log(newColor);
     this.setState({ currentColor: newColor.hex });
   }
+
   addNewColor() {
     const newColor = {
       color: this.state.currentColor,
@@ -122,6 +124,17 @@ class NewPaletteForm extends Component {
     };
     this.setState({ colors: [...this.state.colors, newColor], newName: "" });
   }
+
+  savePalette = () => {
+    let newName = "New Test Palette";
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      colors: this.state.colors
+    };
+    this.props.savePalette(newPalette);
+    this.props.history.push("/");
+  };
 
   render() {
     // {theme}
@@ -133,6 +146,7 @@ class NewPaletteForm extends Component {
         <CssBaseline />
         <AppBar
           position="fixed"
+          color="default"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open
           })}
@@ -147,8 +161,15 @@ class NewPaletteForm extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              Persistent drawer
+              Material Color Palette Maker
             </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.savePalette}
+            >
+              Save Palette
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer
