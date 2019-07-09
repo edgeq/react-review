@@ -10,8 +10,10 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { ChromePicker } from "react-color";
 import Button from "@material-ui/core/Button";
+import DraggableColorBox from './DraggableColorBox';
+import { ChromePicker } from "react-color";
+
 
 const drawerWidth = 400;
 
@@ -56,6 +58,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
+    height: "calc(100vh - 64px)",
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -73,9 +76,16 @@ const styles = theme => ({
 });
 
 class NewPaletteForm extends Component {
-  state = {
-    open: false
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      open: false,
+      currentColor: "teal",
+      colors: ['pink', "#bada55"]
+    };
+    this.updateCurrentColor = this.updateCurrentColor.bind(this);
+    this.addNewColor = this.addNewColor.bind(this);
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -84,11 +94,19 @@ class NewPaletteForm extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+  updateCurrentColor(newColor){
+    //will update color
+    console.log(newColor);
+    this.setState({currentColor: newColor.hex});
+  }
+  addNewColor(){
+    this.setState({colors: [...this.state.colors, this.state.currentColor]})
+  }
 
   render() {
     // {theme}
     const { classes } = this.props;
-    const { open } = this.state;
+    const { open, currentColor, colors } = this.state;
 
     return (
       <div className={classes.root}>
@@ -138,10 +156,10 @@ class NewPaletteForm extends Component {
             </Button>
           </div>
           <ChromePicker
-            color={"purple"}
-            onChangeComplete={newColor => console.log(newColor)}
+            color={currentColor}
+            onChangeComplete={this.updateCurrentColor}
           />
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" style={{backgroundColor: currentColor}} onClick={this.addNewColor}>
            Add Color
           </Button>
         </Drawer>
@@ -151,6 +169,11 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
+
+            {colors.map(color => (
+              <DraggableColorBox color={color} />
+            ))}
+
         </main>
       </div>
     );
