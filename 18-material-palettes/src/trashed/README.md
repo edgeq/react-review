@@ -1,3 +1,3 @@
 # Trashed?
 
-We started with CSS and moves to JSS. These files represent the original CSS files.
+Started with CSS then moved to JSS. These files represent the original CSS files.
