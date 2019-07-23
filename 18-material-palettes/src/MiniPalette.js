@@ -1,27 +1,48 @@
-import React from "react";
+import React, { Component } from "react";
 import { withStyles } from "@material-ui/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
 // styles is an object comprised of classNames
-import styles from './styles/MiniPaletteStyles';
+import styles from "./styles/MiniPaletteStyles";
 
+class MiniPalette extends Component {
+  constructor(props) {
+    super(props);
+    // this.state = {};
+    this.deletePalette = this.deletePalette.bind(this);
+  }
 
-function MiniPalette(props) {
-  // we use props because we're in a functional component and NOT a class.
-  // styles will be packaged inside of { classes } on export
-  // { classes } is extracted from withStyles.
-  const { classes, paletteName, emoji, colors } = props;
-  const miniColorBoxes = colors.map(color => (
-    <div style={{ backgroundColor: color.color}} className={classes.miniColor} key={color.name} />
-  ))
+  deletePalette(e) {
+    //stopPropagation is React way of handling event delegation
+    e.stopPropagation();
+    this.props.deletePalette(this.props.id);
+  }
 
-  return (
-    // the onClick event uses method props passed from PaletteList
-    <div className={classes.root} onClick={ props.paletteLink }>
-      <div className={classes.clrDivs}> { miniColorBoxes } </div>
-      <h5 className={classes.title} aria-label={paletteName}>
-        {paletteName} <span className={classes.emoji}>{emoji}</span>
-      </h5>
-    </div>
-  );
+  render() {
+    const { classes, paletteName, paletteLink, emoji, colors } = this.props;
+    const miniColorBoxes = colors.map(color => (
+      <div
+        style={{ backgroundColor: color.color }}
+        className={classes.miniColor}
+        key={color.name}
+      />
+    ));
+
+    return (
+      // the onClick event uses method props passed from PaletteList
+      <div className={classes.root} onClick={paletteLink}>
+        <DeleteIcon
+          className={classes.deleteIcon}
+          style={{ transition: "all 0.3s ease-in-out" }}
+          onClick={this.deletePalette}
+        />
+
+        <div className={classes.clrDivs}> {miniColorBoxes} </div>
+        <h5 className={classes.title} aria-label={paletteName}>
+          {paletteName} <span className={classes.emoji}>{emoji}</span>
+        </h5>
+      </div>
+    );
+  }
 }
 
 // Component Inception:
