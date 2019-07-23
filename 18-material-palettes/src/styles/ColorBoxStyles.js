@@ -1,4 +1,5 @@
 import chroma from "chroma-js";
+import sizes from "./sizes";
 
 export default {
   //className : { key: value}
@@ -13,18 +14,35 @@ export default {
     cursor: "pointer",
     "&:hover button": {
       opacity: "1"
+    },
+    [sizes.down("lg")]: {
+      width: "25%",
+      height: props => (props.showingFullPalette ? "20%" : "33.3333%")
+    },
+    [sizes.down("md")]: {
+      width: "50%",
+      height: props => (props.showingFullPalette ? "10%" : "20%")
+    },
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: props => (props.showingFullPalette ? "5%" : "10%")
     }
   },
   copyText: {
     // styles has access to props (we don't use 'this.props' because we're not in a class)
     // using props, we can dynamically set styles
-    color: props => chroma(props.background).luminance() >= 0.54 ? "black" : "white"
+    color: props =>
+      chroma(props.background).luminance() >= 0.54 ? "black" : "white"
   },
   colorName: {
-    color: props => chroma(props.background).luminance() <= 0.18 ? "white" : "black"
+    color: props =>
+      chroma(props.background).luminance() <= 0.18 ? "white" : "black"
   },
   seeMore: {
-    color: props => chroma(props.background).luminance() >= 0.54 ? "rgba(0,0,0,0.6)" : "white",
+    color: props =>
+      chroma(props.background).luminance() >= 0.54
+        ? "rgba(0,0,0,0.6)"
+        : "white",
     background: "rgba(255, 255, 255, 0.3)",
     position: "absolute",
     border: "none",
@@ -37,7 +55,10 @@ export default {
     textTransform: "uppercase"
   },
   copyButton: {
-    color: props => chroma(props.background).luminance() <= 0.08 ? "white" : "rgba(0,0,0,0.6)",
+    color: props =>
+      chroma(props.background).luminance() <= 0.08
+        ? "white"
+        : "rgba(0,0,0,0.6)",
     width: "100px",
     height: "30px",
     position: "absolute",
@@ -67,7 +88,7 @@ export default {
     color: "black",
     letterSpacing: "1px",
     textTransform: "uppercase",
-    fontSize: "12px",
+    fontSize: "12px"
   },
   copyOverlay: {
     opacity: "0",
@@ -75,13 +96,13 @@ export default {
     width: "100%",
     height: "100%",
     transition: "transform 600ms ease-in-out",
-    transform: "scale(0.1)",
+    transform: "scale(0.1)"
   },
   showOverlay: {
     opacity: "1",
     transform: "scale(50)",
     zIndex: "10",
-    position: "absolute",
+    position: "absolute"
   },
   copyMessage: {
     position: "fixed",
@@ -105,7 +126,10 @@ export default {
       textAlign: "center",
       marginBottom: "0",
       padding: "1rem",
-      textTransform: "uppercase"
+      textTransform: "uppercase",
+      [sizes.down("xs")]: {
+        fontSize: "6rem"
+      }
     },
     "& p": {
       fontSize: "2.5rem",
@@ -117,6 +141,6 @@ export default {
     transform: "scale(1)",
     zIndex: "25",
     transition: "all 400ms ease-in-out",
-    transitionDelay: "300ms",
+    transitionDelay: "300ms"
   }
-}
+};
