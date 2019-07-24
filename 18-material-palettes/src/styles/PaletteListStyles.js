@@ -1,12 +1,16 @@
 import sizes from "./sizes";
+import bg from "./bg.svg";
 
 export default {
   root: {
-    backgroundColor: "teal",
+    // backgroundColor: "teal",
     height: "100vh",
     display: "flex",
     alignItems: "flex-start",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "#dd771e",
+    backgroundImage: `url(${bg})`, // background by SVGBackgrounds.com
+    overflow: "scroll"
   },
   container: {
     width: "60%",
