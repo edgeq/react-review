@@ -32,7 +32,7 @@ export default {
     display: "inline-block",
     margin: "0 auto",
     position: "relative",
-    marginBottom: "-3.5px",
+    marginBottom: "-3.5px"
   },
   clrDivs: {
     backgroundColor: "#dae1e4",
@@ -44,6 +44,7 @@ export default {
   delete: {},
   deleteIcon: {
     color: "white",
+    padding: "0.4rem",
     backgroundColor: "#eb3d30",
     width: "20px",
     height: "20px",
@@ -51,7 +52,7 @@ export default {
     right: 0,
     top: 0,
     zIndex: 10,
-    opacity: 0,
+    opacity: 0
     // transition: "all 0.3s ease-in-out"
   }
 };
