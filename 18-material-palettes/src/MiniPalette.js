@@ -8,13 +8,13 @@ class MiniPalette extends Component {
   constructor(props) {
     super(props);
     // this.state = {};
-    this.deletePalette = this.deletePalette.bind(this);
+    this.deletePaletteDialog = this.deletePaletteDialog.bind(this);
   }
 
-  deletePalette(e) {
+  deletePaletteDialog(e) {
     //stopPropagation is React way of handling event delegation
     e.stopPropagation();
-    this.props.deletePalette(this.props.id);
+    this.props.openDialog(this.props.id);
   }
 
   render() {
@@ -33,7 +33,7 @@ class MiniPalette extends Component {
         <DeleteIcon
           className={classes.deleteIcon}
           style={{ transition: "all 0.3s ease-in-out" }}
-          onClick={this.deletePalette}
+          onClick={this.deletePaletteDialog}
         />
 
         <div className={classes.clrDivs}> {miniColorBoxes} </div>
