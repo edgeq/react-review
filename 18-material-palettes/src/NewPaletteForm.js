@@ -12,8 +12,7 @@ import Button from "@material-ui/core/Button";
 import DraggableColorList from "./DraggableColorList";
 import arrayMove from "array-move";
 import styles from "./styles/NewPaletteFormStyles";
-
-
+import seedColors from "./seedColors";
 
 class NewPaletteForm extends Component {
   static defaultProps = {
@@ -23,7 +22,7 @@ class NewPaletteForm extends Component {
     super(props);
     this.state = {
       open: true,
-      colors: this.props.palettes[0].colors,
+      colors: seedColors[0].colors,
       newColorName: ""
     };
     // this.updateCurrentColor = this.updateCurrentColor.bind(this);
@@ -85,12 +84,22 @@ class NewPaletteForm extends Component {
     // add color from existing palette
     // make an array of all palettes
     const allColors = this.props.palettes.map(p => p.colors).flat();
-    let rand = Math.floor(Math.random() * allColors.length);
-    const randomColor = allColors[rand];
+    let rand;
+    let randomColor;
+    let colorIsDupe = true;
+    while (colorIsDupe) {
+      rand = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[rand];
+      colorIsDupe = this.state.colors.some(
+        color => color.name === randomColor.name
+      );
+      console.log(randomColor);
+    }
     this.setState({ colors: [...this.state.colors, randomColor] });
   }
 
   render() {
+    // console.log(this.state.colors);
     // {theme}
     const { classes, maxColors, palettes } = this.props;
     const { open, colors } = this.state;

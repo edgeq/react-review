@@ -6,7 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import 'emoji-mart/css/emoji-mart.css';
+import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 
 class PaletteMetaForm extends Component {
@@ -34,44 +34,41 @@ class PaletteMetaForm extends Component {
   };
 
   showEmojiPicker = () => {
-    this.setState({stage: "emoji"})
-  }
-  savePalette = (emoji) => {
+    this.setState({ stage: "emoji" });
+  };
+  savePalette = emoji => {
     const newPalette = {
       paletteName: this.state.newPaletteName,
       emoji: emoji.native
-    }
-    this.props.handleSubmit(newPalette)
-  }
+    };
+    this.props.handleSubmit(newPalette);
+  };
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
   handleClose = () => {
-
     this.setState({ open: false });
   };
 
   render() {
-    const { newPaletteName } = this.state;
-    const {hideForm} = this.props;
+    const { newPaletteName, stage } = this.state;
+    const { hideForm } = this.props;
     return (
       <div>
-        <Dialog open={this.state.stage === "emoji"} onClose={hideForm}>
+        <Dialog open={stage === "emoji"} onClose={hideForm}>
           <DialogTitle id="emoji-dialog-title">
             Pick an emoji for palette
           </DialogTitle>
-          <Picker title="Pick a palette emoji" onSelect={this.savePalette}/>
+          <Picker title="Pick a palette emoji" onSelect={this.savePalette} />
         </Dialog>
         <Dialog
-          open={this.state.stage === "form"}
+          open={stage === "form"}
           onClose={hideForm}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Name Palette</DialogTitle>
-          <ValidatorForm
-            onSubmit={this.showEmojiPicker}
-          >
+          <ValidatorForm onSubmit={this.showEmojiPicker}>
             <DialogContent>
               <DialogContentText>
                 Enter a name for your new palette. Make sure it's unique
@@ -101,7 +98,7 @@ class PaletteMetaForm extends Component {
             </DialogActions>
           </ValidatorForm>
         </Dialog>
-    </div>
+      </div>
     );
   }
 }

@@ -105,6 +105,17 @@ class App extends Component {
             </Page>
           )}
         />
+        <Route
+          render={routeProps => (
+            <Page>
+              <PaletteList
+                palettes={palettes}
+                deletePalette={this.deletePalette}
+                {...routeProps}
+              />
+            </Page>
+          )}
+        />
       </Switch>
       // <div className="App">
       //   {/* spread a palette to unpack it's contents as props */}
