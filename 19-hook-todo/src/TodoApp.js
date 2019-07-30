@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
@@ -17,8 +17,14 @@ function TodoApp() {
     { id: uuid(), task: "skate proper", completed: false },
     { id: uuid(), task: "don't die", completed: false }
   ];
+  const initTodos = JSON.parse(window.localStorage.getItem("todos"));
   // start state as an array of objects
-  const [todos, setTodos] = useState(testToDos);
+  const [todos, setTodos] = useState(initTodos || testToDos);
+
+  useEffect(() => {
+    //sync todos with localstorage;
+    window.localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = newTodoText => {
     setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }]);

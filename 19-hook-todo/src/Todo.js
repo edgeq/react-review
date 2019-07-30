@@ -30,6 +30,7 @@ function Todo({ task, completed, removeTodo, id, toggleTodo, editTodo }) {
             onClick={() => toggleTodo(id)}
           />
           <ListItemText
+            onClick={toggle}
             style={{ textDecoration: completed ? "line-through" : "none" }}
           >
             {task}
