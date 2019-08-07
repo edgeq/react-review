@@ -1,14 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import Navbar from "./Navbar";
 import Form from "./Form";
+import PageContent from "./PageContent";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
-function App() {
-  return (
-    <>
-      <Navbar />
-      <Form />
-    </>
-  );
+class App extends Component {
+  render() {
+    return (
+      <ThemeProvider>
+        <PageContent>
+          <Navbar />
+          <Form />
+        </PageContent>
+      </ThemeProvider>
+    );
+  }
 }
 
 export default App;
