@@ -1,6 +1,7 @@
 import React from "react";
 import App, { Container } from "next/app";
 import Navbar from "../components/Navbar";
+import Header from "../components/Header";
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -24,7 +25,9 @@ class MyApp extends App {
     return (
       <Container>
         <Navbar />
+
         <Component {...pageProps} />
+        <Header />
       </Container>
     );
   }
